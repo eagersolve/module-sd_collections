@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+    <id>sd_collections</id>
+    <version>1.0</version>
+    <priority>1200</priority>
+    <position>10</position>
+    <status>active</status>
+
+    <queries>
+        <item for="install">
+            CREATE TABLE `?:collections` (
+            `collection_id` INT(11) unsigned NOT NULL AUTO_INCREMENT,
+            `position` INT(11) unsigned NOT NULL DEFAULT 0,
+            `status` varchar(1) NOT NULL DEFAULT 'A',
+            `timestamp` INT(11) unsigned NOT NULL DEFAULT 0,
+            `upd_timestamp` INT(11) unsigned NOT NULL DEFAULT 0,
+            `user_id` INT(11) unsigned NOT NULL DEFAULT 0,
+            PRIMARY KEY (`collection_id`),  
+            KEY `user_id` (`user_id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8
+        </item>
+        <item for="install">
+            CREATE TABLE `?:collection_descriptions` (
+            `collection_id` INT(11) unsigned NOT NULL DEFAULT 0,
+            `lang_code` char(2) NOT NULL DEFAULT '',
+            `collection` varchar(255) NOT NULL DEFAULT '',
+            `description` text DEFAULT NULL,
+            PRIMARY KEY (`collection_id`, `lang_code`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+        </item>
+        <item for="install">
+            CREATE TABLE `?:collection_links` (
+            `collection_id` INT(11) unsigned NOT NULL DEFAULT 0,
+            `product_id` INT(11) unsigned NOT NULL DEFAULT 0,
+            PRIMARY KEY (`collection_id`, `product_id`),
+            KEY `product_id` (`product_id`),
+            KEY `collection_id` (`collection_id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+        </item>
+        <item for="uninstall">DROP TABLE IF EXISTS ?:collections;</item>
+        <item for="uninstall">DROP TABLE IF EXISTS ?:collection_descriptions;</item>
+        <item for="uninstall">DROP TABLE IF EXISTS ?:collection_links;</item>
+    </queries>
+</addon>
