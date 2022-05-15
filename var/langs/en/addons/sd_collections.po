@@ -1,0 +1,17 @@
+msgid ""
+msgstr "Project-Id-Version: tygh\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: English\n"
+"Language: en_US"
+
+msgctxt "Addons::name::sd_collections"
+msgid "Simtech Development: Collections"
+msgstr "Simtech Development: Collections"
+
+msgctxt "Addons::description::sd_collections"
+msgid "Allows you to add products collections.>"
+msgstr "Allows you to add products collections."
+
+msgctxt "SettingsSections::sd_collections.collections"
+msgid "Collections"
+msgstr "Collections"
