@@ -137,7 +137,7 @@
 
 
 {hook name="collections:manage_mainbox_params"}
-    {$page_title = "Коллекции"}
+    {$page_title = __("sd_collections.collections")}
     {$select_languages = true}
 {/hook}
 
