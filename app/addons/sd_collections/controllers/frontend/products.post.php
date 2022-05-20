@@ -1,5 +1,16 @@
 <?php
+/***************************************************************************
+*                                                                          *
+*   (c) Simtech Development Ltd.                                           *
+*                                                                          *
+* This  is  commercial  software,  only  users  who have purchased a valid *
+* license  and  accept  to the terms of the  License Agreement can install *
+* and use this program.                                                    *
+***************************************************************************/
+
 use Tygh\Registry;
+
+defined('BOOTSTRAP') or die('Access denied'); 
 
 if ($mode == 'collections') {
   
@@ -7,7 +18,7 @@ if ($mode == 'collections') {
 
   $params = $_REQUEST;
 
-  $params['user_id'] = Tygh::$app['session']['auth']['user_id'];
+//   $params['user_id'] = Tygh::$app['session']['auth']['user_id'];
 
 
   if (Registry::get('settings.General.show_products_from_subcategories') == 'Y') {
@@ -25,7 +36,7 @@ if ($mode == 'collections') {
   Tygh::$app['view']->assign('search', $search);
   Tygh::$app['view']->assign('columns', 4);
 
-  fn_add_breadcrumb(__('collections'));
+  fn_add_breadcrumb(__('sd_collections.collections'));
 
 
 } elseif ($mode == 'collection') {
@@ -33,6 +44,8 @@ if ($mode == 'collections') {
   $collection_data = [];
   $collection_id = !empty($_REQUEST['collection_id']) ? $_REQUEST['collection_id'] : 0;
   $collection_data = fn_get_collection_data ($collection_id, CART_LANGUAGE);
+
+  fn_add_breadcrumb(__('sd_collections.collection'));
 
       if (empty($collection_data)) {
           return [CONTROLLER_STATUS_NO_PAGE];
@@ -63,10 +76,6 @@ if ($mode == 'collections') {
 
 
   list($products, $search) = fn_get_products($params, Registry::get('settings.Appearance.products_per_page'));
-
-
-
-  fn_filters_handle_search_result($params, $products, $search);
 
   fn_gather_additional_products_data($products, [
       'get_icon'      => true,

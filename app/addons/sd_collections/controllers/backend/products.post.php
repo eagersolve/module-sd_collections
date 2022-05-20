@@ -1,6 +1,16 @@
 <?php
+/***************************************************************************
+*                                                                          *
+*   (c) Simtech Development Ltd.                                           *
+*                                                                          *
+* This  is  commercial  software,  only  users  who have purchased a valid *
+* license  and  accept  to the terms of the  License Agreement can install *
+* and use this program.                                                    *
+***************************************************************************/
 
 use Tygh\Registry;
+
+defined('BOOTSTRAP') or die('Access denied'); 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -68,7 +78,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } elseif ($mode=='manage_collections' ) {
 
     list($collections, $search) = fn_get_collections($_REQUEST, Registry::get('settings.Appearance.admin_elements_per_page'), DESCR_SL);
+  
+    foreach ($collections as $collection) {
+        $collection_data = fn_get_collection_data($collection['collection_id']);
 
+    if (empty($collection_data['product_ids'])) {
+        $empty_collections[] = $collection_data['collection'];
+    }
+}
+
+if (!empty($empty_collections)) {
+    fn_set_notification('E', __('error'), __('sd_collections.empty_collections', [
+        '[name]' => implode(',', $empty_collections)
+    ]));
+}
 
     Tygh::$app['view']->assign('collections', $collections);
     Tygh::$app['view']->assign('search', $search);

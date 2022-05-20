@@ -1,5 +1,5 @@
 msgid ""
-msgstr "Project-Id-Version: tygh"
+msgstr "Project-Id-Version: tygh\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU"
@@ -20,7 +20,7 @@ msgctxt "Languages::sd_collections.collection"
 msgid "Collection"
 msgstr "Коллекция"
 
-msgctxt "Languages::sd_collections.empty_collection"
+msgctxt "Languages::sd_collections.empty_collections"
 msgid "Fill in the empty collections: [name]"
 msgstr "Заполните коллекции без продуктов: [name]"
 
